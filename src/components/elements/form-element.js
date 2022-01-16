@@ -1,8 +1,8 @@
 import React from 'react';
-import { Divider, Form, Input, InputNumber, Select, Checkbox, Radio, Slider, Rate, Button } from 'antd';
+import { Divider, Form, Input, InputNumber, Select, Checkbox, Radio, Slider, Rate, Button, DatePicker, TimePicker } from 'antd';
 import Signature from './signature';
-import DatePicker from './DatePicker';
-import TimePicker from './TimePicker';
+// import DatePicker from './DatePicker';
+// import TimePicker from './TimePicker';
 import Upload from './Upload'
 
 const FormElement = ({ element }) => {

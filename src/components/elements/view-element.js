@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider, Rate, Tag, Slider, Image } from 'antd';
-import dayjs from 'dayjs'
+import moment from 'moment'
 const ViewElement = ({ element, value, ...props }) => {
 
     const { type, ...data } = element;
@@ -55,7 +55,7 @@ const ViewElement = ({ element, value, ...props }) => {
             case "DatePicker":
             case "TimePicker":
                 console.log(value)
-                return (<div>{value ? (dayjs(value)).format(data.format) : null}</div>);
+                return (<div>{value ? (moment(value)).format(data.format) : null}</div>);
             case "TextArea":
                 return (<pre>{value}</pre>)
             case "Signature":

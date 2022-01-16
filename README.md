@@ -1,16 +1,16 @@
 # Form Builder
 
-@thecfguy/react-antd-form-builder is drag and drop form builder using antd (Ant Design) components allow you to build,render and view form in browser. 
+`react-antd-form-creator` is drag and drop form builder using antd (Ant Design) components allow you to build,render and view form in browser. 
 
 
 
 ### Install
 
-`npm install @thecfguy/react-antd-form-builder`
+`npm install react-antd-form-creator`
 
 or 
 
-`yarn add @thecfguy/react-antd-form-builder`
+`yarn add react-antd-form-creator`
 
 
 ### Demo/StoryBook

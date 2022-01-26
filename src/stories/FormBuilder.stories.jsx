@@ -20,8 +20,17 @@ FromScratch.args = {
 			key: 'File',
 			fieldProps: {
 				action: 'https://s3.amazonaws.com/[mybucket]/',
-				headers: {
-					authorization: 'authorization-text',
+				extra: {
+					'x-amz-credential':
+						'AKIAZT2DSAEDY6ILBCOD/20220118/us-east-1/s3/aws4_request',
+					Policy:
+						'eyJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJvbmV0b3VjaC1hc3NldHMtZGV2In0seyJhY2wiOiJwcml2YXRlIn0seyJ4LWFtei1zZXJ2ZXItc2lkZS1lbmNyeXB0aW9uIjoiQUVTMjU2In0seyJ4LWFtei1jcmVkZW50aWFsIjoiQUtJQVpUSEVJTDJHWTZJTEJDT0QvMjAyMjAxMTgvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsieC1hbXotYWxnb3JpdGhtIjoiQVdTNC1ITUFDLVNIQTI1NiJ9LHsieC1hbXotZGF0ZSI6IjIwMjIwMTE4VDA3MjQxNloifSxbInN0YXJ0cy13aXRoIiwiJENvbnRlbnQtVHlwZSIsIiJdLFsic3RhcnRzLXdpdGgiLCIka2V5IiwidGVtcGZpbGVzIl1dLCJleHBpcmF0aW9uIjoiMjAyMi0wMS0xOFQwODoyNDoxNi4wMDBaIn0=',
+					'x-amz-server-side-encryption': 'AES256',
+					'x-amz-date': '20220118T072416Z',
+					'x-amz-algorithm': 'AWS4-HMAC-SHA256',
+					key: 'tempfiles',
+					signature:
+						'd5d7908b0d568a08a5e0a34ef08288cf8ea327889ad4c5dea71494c43c75108a',
 				},
 			},
 		},
@@ -44,6 +53,9 @@ FromScratch.args = {
 			},
 		},
 	],
+	formProps: {
+		layout: 'vertical',
+	},
 };
 
 export const PreLoaded = Template.bind({});
@@ -262,4 +274,29 @@ PreLoaded.args = {
 		requiredMark: true,
 		labelCol: { span: 5 },
 	},
+};
+
+export const NoPreview = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+NoPreview.args = {
+	fields: [
+		{
+			dropEffect: 'move',
+			content: 'Header',
+			id: 'b8d264c4-ea10-4dd0-990e-6ad4ca090c42',
+			type: 'Header',
+			field_name: 'field_de8ce171-8877-4f70-9173-57e6f2668a9d',
+		},
+		{
+			dropEffect: 'move',
+			content: 'Your text',
+			id: 'b664c762-9673-4142-925f-e761fc3b9496',
+			type: 'Paragraph',
+			field_name: 'field_1e8fe106-5cb1-4a59-814b-c19e38732c68',
+		},
+	],
+	onUpdate: function (fields) {
+		console.log(fields);
+	},
+	showPreviewTab: false,
 };

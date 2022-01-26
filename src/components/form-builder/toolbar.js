@@ -5,7 +5,6 @@
 import React, { useEffect, useState } from 'react';
 import ToolbarItem from './toolbar-draggable-item';
 import FormItems from './form-items';
-import { Menu } from 'antd';
 
 function buildItems(items, fieldProps = [], defaultItems) {
 	let resultItems = []
@@ -30,17 +29,15 @@ const Toolbar = ({ fields, fieldProps, ...props }) => {
 	}, [fields, fieldProps]);
 
 	return (
-		<Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+		<div>
 			{items.map((item) => (
-				<Menu.Item key={item.key} icon={<i className={item.icon}></i>} style={{ border: "1px solid #efefef" }}>
-					<ToolbarItem
-						data={item}
-						key={item.key}
-					/>
-				</Menu.Item>
+				<ToolbarItem
+					data={item}
+					key={item.key}
+				/>
 			))
 			}
-		</Menu >
+		</div>
 	);
 };
 

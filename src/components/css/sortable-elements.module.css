@@ -1,5 +1,5 @@
 .element {
-    padding: 0.2rem;
+    padding: 2px;
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -7,8 +7,8 @@
 }
 
 .element:hover {
-    background-color: ivory;
-    border: 1px solid #0000002c;
+    background-color: #ffffff;
+    border: 1px solid #efefef;
 }
 
 .sorter {

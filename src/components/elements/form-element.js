@@ -1,8 +1,6 @@
 import React from 'react';
 import { Divider, Form, Input, InputNumber, Select, Checkbox, Radio, Slider, Rate, Button, DatePicker, TimePicker } from 'antd';
 import Signature from './signature';
-// import DatePicker from './DatePicker';
-// import TimePicker from './TimePicker';
 import Upload from './Upload'
 
 const FormElement = ({ element }) => {
@@ -30,7 +28,7 @@ const FormElement = ({ element }) => {
                 {
                     if (data.src === "")
                         data.src = 'https://via.placeholder.com/728x90.png?text=Place+Your+Image+Here';
-                    return (<div><img src={data.src} alt={data.alt} /></div>);
+                    return (<div style={{ textAlign: "center" }}><img src={data.src} alt={data.alt} /></div>);
                 }
             case "TextInput":
                 return wrapFormItem(<Input {...data} />);
@@ -39,7 +37,7 @@ const FormElement = ({ element }) => {
             case "Dropdown":
                 return wrapFormItem(<Select {...data} />);
             case "Tags":
-                return wrapFormItem(<Select mode="tags" {...data} />);
+                return wrapFormItem(<Select  {...data} mode="tags" />);
             case "Checkboxes":
                 return wrapFormItem(<Checkbox.Group {...data} />);
             case "RadioButtons":

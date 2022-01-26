@@ -1,3 +1,4 @@
-.dropzone {
-    min-height: 300px;
+.dropzone {  
+    height: 100%
 };
+

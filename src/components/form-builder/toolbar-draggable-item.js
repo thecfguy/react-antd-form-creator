@@ -6,7 +6,7 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 import ItemTypes from '../ItemTypes';
 import ID from '../UUID';
-import classes from '../css/toolbar-item.module.css';
+import classes from '../css/toolbar-draggable-item.module.css';
 
 const cardSource = {
 	beginDrag(props) {
@@ -23,7 +23,9 @@ const ToolbarItem = (props) => {
 	const { connectDragSource, data, onClick } = props;
 	if (!connectDragSource) return null;
 	return (
-		<div ref={connectDragSource} onClick={onClick}>{data.name}</div>
+		<div ref={connectDragSource} className={classes.item} onClick={onClick}>
+			<i className={data.icon}></i> <div>{data.name}</div>
+		</div>
 	);
 };
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormElement } from '../../elements';
 import Options from './options';
 import Rules from './rules';

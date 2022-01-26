@@ -37,7 +37,6 @@ const Template = (args) => (
 );
 
 export const RenderForm = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 RenderForm.args = {
 	elements: [
 		{
@@ -224,6 +223,42 @@ RenderForm.args = {
 			maxLabel: 'Difficult',
 			id: '91f785ca-6927-4445-b742-bef14a56f755',
 			type: 'Range',
+		},
+	],
+};
+
+export const UploadS3Presigned = Template.bind({});
+
+UploadS3Presigned.args = {
+	elements: [
+		{
+			field_name: 'field_26d97f40-6440-42e9-8384-ca71a7ebe792',
+			label: 'Photo',
+			multiple: true,
+			accept: 'image/png, image/jpeg',
+			rules: [{ required: true, message: 'Upload atleast one photo' }],
+			action: 'https://s3.amazonaws.com/onetouch-assets-dev/',
+			data: (file) => {
+				let fileparts = file.name.split('.');
+				let fileKey =
+					'tempfiles/' + file.uid + '.' + fileparts[fileparts.length - 1];
+				return {
+					key: fileKey,
+					'Content-Type': file.type,
+					acl: 'private',
+					'X-Amz-Credential':
+						'AKIAZTHEIL2GY6ILBCOD/20220118/us-east-1/s3/aws4_request',
+					policy:
+						'eyJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJvbmV0b3VjaC1hc3NldHMtZGV2In0seyJhY2wiOiJwcml2YXRlIn0seyJ4LWFtei1zZXJ2ZXItc2lkZS1lbmNyeXB0aW9uIjoiQUVTMjU2In0seyJ4LWFtei1jcmVkZW50aWFsIjoiQUtJQVpUSEVJTDJHWTZJTEJDT0QvMjAyMjAxMTgvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsieC1hbXotYWxnb3JpdGhtIjoiQVdTNC1ITUFDLVNIQTI1NiJ9LHsieC1hbXotZGF0ZSI6IjIwMjIwMTE4VDExMDEyNVoifSxbInN0YXJ0cy13aXRoIiwiJENvbnRlbnQtVHlwZSIsIiJdLFsic3RhcnRzLXdpdGgiLCIka2V5IiwidGVtcGZpbGVzIl1dLCJleHBpcmF0aW9uIjoiMjAyMi0wMS0xOFQxMjowMToyNS4wMDBaIn0=',
+					'X-Amz-Algorithm': 'AWS4-HMAC-SHA256',
+					'X-Amz-Date': '20220118T110125Z',
+					'x-amz-server-side-encryption': 'AES256',
+					'X-Amz-Signature':
+						'cf33bd2ad50e9c36708795a2ee72a854f2a492a44bc97f46f232bdd78882d118',
+				};
+			},
+			id: 'dc64347f-a648-4476-8ea4-7171b2975df6',
+			type: 'Photo',
 		},
 	],
 };

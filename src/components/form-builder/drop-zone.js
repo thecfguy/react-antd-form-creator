@@ -6,7 +6,17 @@ import SortableElement from '../form-builder/sortable-element';
 import { Form } from 'antd';
 import PropertyEditor from '../form-builder/property-editor';
 
-export const DropZone = ({ elements, onUpdate }) => {
+const dropZoneLabel = {
+    border: '1px dashed #e9e9e9',
+    padding: '10px',
+    margin: '10px',
+    textAlign: 'center',
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    backgroundColor: '#fafafa',
+}
+
+export const DropZone = ({ elements, onUpdate, formProps }) => {
 
     const [visible, setVisible] = useState(false);
     const [currentElement, setCurrentElement] = useState(null);
@@ -52,10 +62,10 @@ export const DropZone = ({ elements, onUpdate }) => {
     const isActive = canDrop && isOver;
     let backgroundColor = '#fff';
     if (isActive) {
-        backgroundColor = '#eee';
+        backgroundColor = '#fafafa';
     }
     else if (canDrop) {
-        backgroundColor = '#eee';
+        backgroundColor = '#fafafa';
     }
 
     return (
@@ -63,7 +73,7 @@ export const DropZone = ({ elements, onUpdate }) => {
             <Form labelAlign="right"
                 colon
                 requiredMark
-                labelCol={{ span: 5 }}>
+                labelCol={{ span: 5 }} {...formProps}>
                 {elements.map((element, index) => {
                     return <SortableElement key={element.id}
                         index={index}
@@ -72,6 +82,7 @@ export const DropZone = ({ elements, onUpdate }) => {
                         onEdit={editHandler}
                         onDelete={deleteHandler} />
                 })}
+                {elements.length === 0 && <div style={dropZoneLabel}>Drag and drop elements here</div>}
             </Form>
             <PropertyEditor show={visible} element={currentElement} onClose={(e) => setVisible(false)} onSubmit={submitHandler}></PropertyEditor>
         </div >

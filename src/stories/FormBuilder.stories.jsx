@@ -19,7 +19,7 @@ FromScratch.args = {
 		{
 			key: 'File',
 			fieldProps: {
-				action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+				action: 'https://s3.amazonaws.com/[mybucket]/',
 				headers: {
 					authorization: 'authorization-text',
 				},
@@ -28,9 +28,18 @@ FromScratch.args = {
 		{
 			key: 'Photo',
 			fieldProps: {
-				action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-				headers: {
-					authorization: 'authorization-text',
+				action: 'https://s3.amazonaws.com/[mybucket]/',
+				extra: {
+					'x-amz-credential':
+						'AKIAZT2DSAEDY6ILBCOD/20220118/us-east-1/s3/aws4_request',
+					Policy:
+						'eyJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJvbmV0b3VjaC1hc3NldHMtZGV2In0seyJhY2wiOiJwcml2YXRlIn0seyJ4LWFtei1zZXJ2ZXItc2lkZS1lbmNyeXB0aW9uIjoiQUVTMjU2In0seyJ4LWFtei1jcmVkZW50aWFsIjoiQUtJQVpUSEVJTDJHWTZJTEJDT0QvMjAyMjAxMTgvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsieC1hbXotYWxnb3JpdGhtIjoiQVdTNC1ITUFDLVNIQTI1NiJ9LHsieC1hbXotZGF0ZSI6IjIwMjIwMTE4VDA3MjQxNloifSxbInN0YXJ0cy13aXRoIiwiJENvbnRlbnQtVHlwZSIsIiJdLFsic3RhcnRzLXdpdGgiLCIka2V5IiwidGVtcGZpbGVzIl1dLCJleHBpcmF0aW9uIjoiMjAyMi0wMS0xOFQwODoyNDoxNi4wMDBaIn0=',
+					'x-amz-server-side-encryption': 'AES256',
+					'x-amz-date': '20220118T072416Z',
+					'x-amz-algorithm': 'AWS4-HMAC-SHA256',
+					key: 'tempfiles',
+					signature:
+						'd5d7908b0d568a08a5e0a34ef08288cf8ea327889ad4c5dea71494c43c75108a',
 				},
 			},
 		},
@@ -72,7 +81,7 @@ PreLoaded.args = {
 				{ label: 'Option 2', value: 'Option 2' },
 				{ label: 'Option 3', value: 'Option 3' },
 			],
-			rules: [{ required: false, message: 'Select value from list' }],
+			rules: [{ required: true, message: 'Select value from list' }],
 			id: '4bf1b0ec-d615-43da-b332-2802edc1f41c',
 			type: 'Dropdown',
 		},
@@ -98,7 +107,7 @@ PreLoaded.args = {
 				{ label: 'Option 2', value: 'Option 2' },
 				{ label: 'Option 3', value: 'Option 3' },
 			],
-			rules: [{ required: false, message: 'Select atleast one option' }],
+			rules: [{ required: true, message: 'Select atleast one option' }],
 			id: 'f256c57b-a5ee-40d1-933c-ec446deb4182',
 			type: 'Checkboxes',
 		},
@@ -247,4 +256,10 @@ PreLoaded.args = {
 			},
 		},
 	],
+	formProps: {
+		labelAlign: 'left',
+		colon: true,
+		requiredMark: true,
+		labelCol: { span: 5 },
+	},
 };

@@ -10,7 +10,7 @@ import DropZone from './drop-zone';
 
 const { Sider, Content } = Layout;
 const { TabPane } = Tabs;
-const FormBuilder = ({ fields = [], onUpdate, fieldProps, ...props }) => {
+const FormBuilder = ({ fields = [], onUpdate, fieldProps, formProps, ...props }) => {
     const [elements, setElements] = useState([]);
     const [showPreview, setShowPreview] = useState(false)
     const [formValue, setFormValue] = useState({});
@@ -36,8 +36,13 @@ const FormBuilder = ({ fields = [], onUpdate, fieldProps, ...props }) => {
                             <Sider theme='light' width={250} breakpoint='md' collapsedWidth={0} >
                                 <Toolbar fieldProps={fieldProps} />
                             </Sider>
-                            <Content style={{ "backgroundColor": "#fff" }}>
-                                <DropZone elements={elements} onUpdate={updateFormElement} />
+                            <Content style={{
+                                padding: 24,
+                                margin: 0,
+                                minHeight: 280,
+                                backgroundColor: '#fff',
+                            }}>
+                                <DropZone elements={elements} onUpdate={updateFormElement} formProps={formProps} />
                             </Content>
                         </Layout>
                     </TabPane>
@@ -46,11 +51,8 @@ const FormBuilder = ({ fields = [], onUpdate, fieldProps, ...props }) => {
                             <Col span={2}></Col>
                             <Col span={20}>
                                 <Form
+                                    {...formProps}
                                     onFinish={onFormSubmit}
-                                    labelAlign="left"
-                                    colon
-                                    requiredMark
-                                    labelCol={{ span: 3 }}
                                     onSubmit
                                 >
                                     <FormRenderer elements={elements}></FormRenderer>

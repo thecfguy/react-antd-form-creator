@@ -15,8 +15,14 @@ const UploadS3 = ({ action, value, onChange, children, listType, onPreview, mult
     const [previewImage, setPreviewImage] = React.useState("");
     const [previewTitle, setPreviewTitle] = React.useState("");
 
-    const changeHandler = ({ fileList }) => {
+    const changeHandler = async ({ fileList }) => {
         let res = fileList.map(file => ({ uid: file.uid, name: file.name, status: file.status, url: file.url ? file.url : file.response?.url }))
+        //If url doesn't return, then set as base64 string
+        for (let i = 0; i < res.length; i++) {
+            if (!res[i]?.url) {
+                res[i]["url"] = await getBase64(fileList[i].originFileObj);
+            }
+        }
         onChange?.(res);
     };
     const handlePreview = async file => {
@@ -27,6 +33,7 @@ const UploadS3 = ({ action, value, onChange, children, listType, onPreview, mult
         setPreviewImage(file.url || file.preview);
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
     };
+
     return (
         <>
             <Upload
@@ -35,7 +42,7 @@ const UploadS3 = ({ action, value, onChange, children, listType, onPreview, mult
                 listType={listType}
                 multiple={multiple}
                 fileList={value ? value : null}
-                onPreview={onPreview ? onPreview : listType === "picture-card" ? handlePreview : null}
+                onPreview={onPreview ? onPreview : (listType === "picture-card" ? handlePreview : null)}
                 {...props}
             >
                 {children ? (

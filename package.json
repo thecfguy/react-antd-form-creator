@@ -1,11 +1,19 @@
 {
 	"name": "react-antd-form-creator",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Allow to build form using drag and drop component specifically build for antd",
 	"author": "Pritesh Patel",
 	"license": "MIT",
 	"main": "dist/index.js",
 	"module": "dist/index.es.js",
+	"homepage": "https://github.com/thecfguy/react-antd-form-creator",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thecfguy/react-antd-form-creator.git"
+	},
+	"bugs": {
+		"url": "https://github.com/thecfguy/react-antd-form-creator/issues"
+	},
 	"peerDependencies": {
 		"@fortawesome/fontawesome-free": "^5.15.4",
 		"antd": "^4.17.3",

@@ -28,7 +28,6 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
         setFormValue(values);
         setShowPreview(true);
     }
-    console.log(showPreviewTab)
     return (
         <DndProvider backend={HTML5Backend}>
             <FormBuilderContext.Provider value={{ elements, setElements }}>

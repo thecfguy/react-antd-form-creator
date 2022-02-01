@@ -54,7 +54,6 @@ const ViewElement = ({ element, value, ...props }) => {
                 return (<Rate disabled value={value}></Rate>)
             case "DatePicker":
             case "TimePicker":
-                console.log(value)
                 return (<div>{value ? (moment(value)).format(data.format) : null}</div>);
             case "TextArea":
                 return (<pre>{value}</pre>)

@@ -1,6 +1,6 @@
 {
 	"name": "react-antd-form-creator",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Allow to build form using drag and drop component specifically build for antd",
 	"author": "Pritesh Patel",
 	"license": "MIT",
@@ -24,7 +24,7 @@
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
 		"build-lib": "rollup -c",
-		"chromatic": "chromatic"
+		"chromatic": "chromatic --project-token=e******f"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.7",

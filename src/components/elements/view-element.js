@@ -41,7 +41,9 @@ const ViewElement = ({ element, value, ...props }) => {
                             src={item.url}
                             key={index}
                             style={{
-                                padding: '5px'
+                                padding: '5px',
+                                minHeight: '100px',
+                                border: '1px solid #ccc',
                             }}
                         />
                     )
@@ -58,7 +60,10 @@ const ViewElement = ({ element, value, ...props }) => {
             case "TextArea":
                 return (<pre>{value}</pre>)
             case "Signature":
-                return (<img src={value} alt='Signature' />)
+                return (<Image
+                    width={200}
+                    src={value}
+                />)
             case "Range":
                 const marks = { [data.min]: data.minLabel, [data.max]: data.maxLabel }
                 const { minLabel, maxLabel, ...rangeProps } = data;

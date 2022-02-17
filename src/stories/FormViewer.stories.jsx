@@ -11,11 +11,9 @@ export default {
 
 const Template = (args) => (
 	<Row>
-		<Col span={2}></Col>
-		<Col span={20}>
+		<Col>
 			<FormViewer {...args}></FormViewer>
 		</Col>
-		<Col span={2}></Col>
 	</Row>
 );
 
@@ -37,14 +35,7 @@ RenderForm.args = {
 			type: 'Paragraph',
 			field_name: 'field_1e8fe106-5cb1-4a59-814b-c19e38732c68',
 		},
-		{
-			dropEffect: 'move',
-			field_name: 'field_a840e936-90f7-46df-a58b-f9a696de9155',
-			src: '',
-			alt: 'Update URL',
-			id: 'f7c2092c-77af-48b6-ac74-b655efafbedf',
-			type: 'Image',
-		},
+
 		{
 			dropEffect: 'move',
 			field_name: 'field_f9078487-2a9f-48a7-bde6-c55e649fa5a7',
@@ -104,6 +95,18 @@ RenderForm.args = {
 			rules: [{ required: true, message: 'Please enter value' }],
 			id: '4f2db38c-e54f-4701-bf12-217f674a5436',
 			type: 'TextInput',
+		},
+		{
+			dropEffect: 'move',
+			field_name: 'field_26d97f40-6440-42e9-8384-ca71a7ebe792',
+			label: 'Photo',
+			multiple: true,
+			accept: 'image/png, image/jpeg',
+			rules: [{ required: true, message: 'Upload atleast one photo' }],
+			action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+			headers: { authorization: 'authorization-text' },
+			id: 'dc64347f-a648-4476-8ea4-7171b2975df6',
+			type: 'Photo',
 		},
 		{
 			dropEffect: 'move',
@@ -171,18 +174,7 @@ RenderForm.args = {
 			id: 'cc4b711b-cab5-438c-831f-a5dceef15832',
 			type: 'Signature',
 		},
-		{
-			dropEffect: 'move',
-			field_name: 'field_26d97f40-6440-42e9-8384-ca71a7ebe792',
-			label: 'Photo',
-			multiple: true,
-			accept: 'image/png, image/jpeg',
-			rules: [{ required: true, message: 'Upload atleast one photo' }],
-			action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-			headers: { authorization: 'authorization-text' },
-			id: 'dc64347f-a648-4476-8ea4-7171b2975df6',
-			type: 'Photo',
-		},
+
 		{
 			dropEffect: 'move',
 			field_name: 'field_b31b3009-0da3-4dc5-ad59-a1bcaad8bc31',
@@ -228,13 +220,13 @@ RenderForm.args = {
 				uid: 'rc-upload-1642315470027-18',
 				name: 'placeholder.png',
 				status: 'done',
-				url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+				url: `https://img.wallpapersafari.com/desktop/1920/1080/53/47/4YNVas.jpg?${new Date().getTime()}`,
 			},
 			{
 				uid: 'rc-upload-1642315470027-19',
 				name: 'th_3.27gb-19Min.png',
 				status: 'done',
-				url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+				url: `https://img.wallpapersafari.com/desktop/1920/1080/53/47/4YNVas.jpg?${new Date().getTime()}`,
 			},
 		],
 		'field_b31b3009-0da3-4dc5-ad59-a1bcaad8bc31': [

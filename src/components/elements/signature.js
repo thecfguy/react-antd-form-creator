@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 const Signature = ({ value, onChange, width, height }) => {
 
     const signRef = useRef({})
-
     useEffect(() => {
-        if (value && signRef) {
+        if (value && signRef && signRef.current.isEmpty()) {
             signRef.current.clear();
             signRef.current.fromDataURL(value);
         }

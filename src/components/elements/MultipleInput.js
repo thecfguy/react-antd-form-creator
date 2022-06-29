@@ -26,7 +26,6 @@ const EditableTable = (props) => {
     );
   };
   useEffect(() => {
-    console.log("i am setting columns");
     setColumnsState(
       columns.map((col) => ({
         ...col,
@@ -47,21 +46,23 @@ const EditableTable = (props) => {
     },
   };
 
-  return (
-    <Form.List name={field_name}>
-      {(fields) => {
-        return (
-          <Table
-            components={components}
-            rowClassName={() => "editable-row"}
-            bordered
-            dataSource={dataSource}
-            columns={columnsState}
-          />
-        );
-      }}
-    </Form.List>
-  );
+  if (dataSource)
+    return (
+      <Form.List name={field_name}>
+        {(fields) => {
+          return (
+            <Table
+              components={components}
+              rowClassName={() => "editable-row"}
+              bordered
+              dataSource={dataSource}
+              columns={columnsState}
+            />
+          );
+        }}
+      </Form.List>
+    );
+  else return <div>No data</div>;
 };
 
 export default EditableTable;

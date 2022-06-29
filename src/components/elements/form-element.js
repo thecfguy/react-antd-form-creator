@@ -12,14 +12,15 @@ import {
   Button,
   DatePicker,
   TimePicker,
-  Table,
 } from "antd";
 import Signature from "./signature";
 import Upload from "./Upload";
 import EditableTable from "./EditableTable";
+import Phone from "./Phone";
 
 const FormElement = ({ element }) => {
   const { dropEffect, type, id, label, field_name, rules, ...data } = element;
+
   const wrapFormItem = (children) => {
     return (
       <Form.Item label={label} key={field_name} name={field_name} rules={rules}>
@@ -91,7 +92,10 @@ const FormElement = ({ element }) => {
         );
 
       case "Table":
-        return wrapFormItem(<EditableTable {...data} />);
+        console.log("i am rendering Form Item");
+        return wrapFormItem(<EditableTable {...data} field_name={field_name} />);
+      case "Phone":
+        return wrapFormItem(<Phone {...data} />);
       default:
         return <div>{JSON.stringify(data)}</div>;
     }

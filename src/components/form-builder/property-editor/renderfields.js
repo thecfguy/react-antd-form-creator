@@ -15,7 +15,6 @@ const camel2title = (camelCase) => {
 };
 
 const renderField = (name, value) => {
-  console.log(name, value);
   let type = "TextArea";
   let options = [];
   switch (typeof value) {

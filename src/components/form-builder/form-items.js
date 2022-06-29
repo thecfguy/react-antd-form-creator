@@ -215,6 +215,17 @@ const FormItems = [
     },
   },
 
+  ,
+  {
+    key: "Phone",
+    name: "Phone",
+    icon: "fas fa-phone",
+    fieldProps: {
+      field_name: "phone_",
+      label: "Label",
+    },
+  },
+
   {
     key: "Table",
     name: "Table",
@@ -227,6 +238,11 @@ const FormItems = [
         { title: "Column 2", dataIndex: "column2", key: "column2" },
         { title: "Column 3", dataIndex: "column3", key: "column3" },
       ],
+      value: [
+        { column1: "1", column2: "2", column3: "3" },
+        { column1: "4", column2: "5", column3: "6" },
+      ],
+      ke: "ff",
       noOfRows: 2,
       editable: true,
     },

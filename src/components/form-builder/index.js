@@ -21,6 +21,7 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
     setElements(fields);
   }, [fields]);
   const updateFormElement = (elem) => {
+    console.log("hey i am updating", elem);
     setElements([...elem]);
     onUpdate?.(elem);
   };

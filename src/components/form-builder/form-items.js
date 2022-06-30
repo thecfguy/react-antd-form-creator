@@ -216,15 +216,15 @@ const FormItems = [
   },
 
   ,
-  {
-    key: "Phone",
-    name: "Phone",
-    icon: "fas fa-phone",
-    fieldProps: {
-      field_name: "phone_",
-      label: "Label",
-    },
-  },
+  // {
+  //   key: "Phone",
+  //   name: "Phone",
+  //   icon: "fas fa-phone",
+  //   fieldProps: {
+  //     field_name: "phone_",
+  //     label: "Label",
+  //   },
+  // },
 
   {
     key: "Table",
@@ -234,17 +234,18 @@ const FormItems = [
       field_name: "table_",
       label: "Label",
       columns: [
-        { title: "Column 1", dataIndex: "column1", key: "column1" },
-        { title: "Column 2", dataIndex: "column2", key: "column2" },
-        { title: "Column 3", dataIndex: "column3", key: "column3" },
+        {
+          title: "Column 1",
+          dataIndex: "column1",
+          key: "column1",
+          inputType: "Text",
+          isRequired: true,
+        },
+        { title: "Column 2", dataIndex: "column2", key: "column2", inputType: "Text" },
+        { title: "Column 3", dataIndex: "column3", key: "column3", inputType: "Text" },
       ],
-      value: [
-        { column1: "1", column2: "2", column3: "3" },
-        { column1: "4", column2: "5", column3: "6" },
-      ],
-      ke: "ff",
-      noOfRows: 2,
-      editable: true,
+      noOfRows: 3,
+      autoAddLastRow: false,
     },
   },
   // {

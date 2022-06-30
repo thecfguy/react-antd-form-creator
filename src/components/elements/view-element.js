@@ -1,6 +1,7 @@
 import React from "react";
 import { Divider, Rate, Tag, Slider, Image, Table } from "antd";
 import moment from "moment";
+import PhoneList from "./PhoneList";
 const ViewElement = ({ element, value, ...props }) => {
   const { type, ...data } = element;
 
@@ -77,7 +78,9 @@ const ViewElement = ({ element, value, ...props }) => {
         const { minLabel, maxLabel, ...rangeProps } = data;
         return <Slider value={value} marks={marks} onChange={(e) => {}} {...rangeProps}></Slider>;
       case "Table":
-        return <Table columns={data.columns} dataSource={value} pagination={false} />;
+        return <Table columns={data.columns} dataSource={value} pagination={false} bordered />;
+      case "Phone":
+        return <PhoneList />;
       default:
         throw new Error(`Unknown element type: ${type}`);
     }

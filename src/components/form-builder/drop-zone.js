@@ -66,7 +66,7 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
   } else if (canDrop) {
     backgroundColor = "#fafafa";
   }
-  console.log(elements, "elements");
+
   return (
     <div ref={drop} className={classes.dropzone} style={{ backgroundColor: backgroundColor }}>
       <Form labelAlign="right" colon requiredMark labelCol={{ span: 5 }} {...formProps}>

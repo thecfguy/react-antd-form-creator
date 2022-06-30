@@ -16,7 +16,7 @@ import {
 import Signature from "./signature";
 import Upload from "./Upload";
 import EditableTable from "./EditableTable";
-import Phone from "./Phone";
+import PhoneList from "./PhoneList";
 
 const FormElement = ({ element }) => {
   const { dropEffect, type, id, label, field_name, rules, ...data } = element;
@@ -92,10 +92,9 @@ const FormElement = ({ element }) => {
         );
 
       case "Table":
-        console.log("i am rendering Form Item");
-        return wrapFormItem(<EditableTable {...data} field_name={field_name} />);
+        return wrapFormItem(<EditableTable {...data} />);
       case "Phone":
-        return wrapFormItem(<Phone {...data} />);
+        return wrapFormItem(<PhoneList {...data} />);
       default:
         return <div>{JSON.stringify(data)}</div>;
     }

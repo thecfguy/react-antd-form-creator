@@ -4,7 +4,6 @@ import { Descriptions } from "antd";
 import PropTypes from "prop-types";
 
 const FormViewer = ({ elements, values, descriptionProps, descriptionItemProps, ...props }) => {
-  console.log(elements, "in view");
   const displayObject = elements.reduce((acc, element, index) => {
     if (
       element.type === "Header" ||

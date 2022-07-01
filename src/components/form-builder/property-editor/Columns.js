@@ -28,7 +28,7 @@ const Columns = (props) => {
         <Form.Item label="Columns">
           {fields.map((field) => (
             <Row key={field.key} align="baseline" gutter={[12]}>
-              <Col span={12}>
+              <Col span={10}>
                 <Form.Item
                   {...field}
                   name={[field.name, "title"]}
@@ -37,7 +37,7 @@ const Columns = (props) => {
                   <Input placeholder="Label" />
                 </Form.Item>
               </Col>
-              <Col span={6} required>
+              <Col span={5} required>
                 <Form.Item {...field} name={[field.name, "inputType"]}>
                   <Select
                     placeholder="Input Type"
@@ -46,7 +46,30 @@ const Columns = (props) => {
                   />
                 </Form.Item>
               </Col>
-              <Col span={5}>
+
+              <Col span={4}>
+                <Space size={12} align="baseline">
+                  <Form.Item
+                    {...field}
+                    name={[field.name, "width"]}
+                    rules={[
+                      {
+                        required: true,
+
+                        validator: (rule, value) => {
+                          if (value < 10) {
+                            return Promise.reject("Width must be greater than 10");
+                          }
+                          return Promise.resolve();
+                        },
+                      },
+                    ]}
+                  >
+                    <Input type="number" min={10} placeholder="Width" />
+                  </Form.Item>
+                </Space>
+              </Col>
+              <Col span={4}>
                 <Space size={12} align="baseline">
                   <Form.Item {...field} name={[field.name, "isRequired"]}>
                     <CustomCheckBox placeholder="Required" />

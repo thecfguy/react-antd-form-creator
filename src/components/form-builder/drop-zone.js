@@ -55,8 +55,12 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
 
   const submitHandler = (values) => {
     const element = { ...currentElement, ...values };
-
     onUpdate?.(elements.map((e, i) => (currentIndex !== i ? e : element)));
+  };
+
+  const onPropertyEditFromElement = (values, index) => {
+    const element = { ...values };
+    onUpdate?.(elements.map((e, i) => (index !== i ? e : element)));
   };
 
   const isActive = canDrop && isOver;
@@ -78,6 +82,7 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
               element={element}
               onMove={moveCard}
               onEdit={editHandler}
+              onEditProperties={onPropertyEditFromElement}
               onDelete={deleteHandler}
             />
           );

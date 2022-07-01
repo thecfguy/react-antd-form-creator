@@ -27,7 +27,6 @@ const PropertyEditor = ({ element, show, onClose, onSubmit }) => {
   }, [show]);
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
     onSubmit?.(values);
     setVisible(false);
   };

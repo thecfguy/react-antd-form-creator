@@ -1,23 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Input, Table } from "antd";
+import { InputTypes } from "../appConstants";
+import CustomInput from "./common/CustomInput";
 
-const EditableCell = ({ title, dataIndex, index, isRequired = false, ...restProps }) => {
+const EditableCell = ({
+  title,
+  width = 50,
+  type,
+  dataIndex,
+  index,
+  isRequired = false,
+  ...restProps
+}) => {
   return (
-    <td {...restProps}>
+    <td {...restProps} style={{ width: width }}>
       <Form.Item
         name={[index, dataIndex]}
-        rules={[
-          { required: isRequired, message: `Please enter ${title} value at row ${index + 1}` },
-        ]}
-        noStyle
+        style={{ margin: 0 }}
+        rules={[{ required: isRequired, message: `This field is required` }]}
       >
-        <Input />
+        <CustomInput type={type} style={{ width: "100%" }} />
       </Form.Item>
     </td>
   );
 };
 const EditableTable = (props) => {
-  const { autoAddLastRow, value, onChange, columns = [], noOfRows } = props;
+  const { element, autoAddLastRow, value, onChange, columns = [], noOfRows, onAnyChange } = props;
   const [dataSource, setDataSource] = useState([]);
   const [columnsState, setColumnsState] = useState([]);
 
@@ -44,7 +52,6 @@ const EditableTable = (props) => {
           onChange(newArray);
           setDataSource(newArray);
         } else {
-          console.log("noOfRows is less than value.length", value.length);
           let newArray = value.slice(0, noOfRows);
           onChange(newArray);
           setDataSource(newArray);
@@ -56,16 +63,20 @@ const EditableTable = (props) => {
   //to set columnsState when we have columns changes
   useEffect(() => {
     if (columns?.length) {
+      console.log("i am changing");
       setColumnsState(
         columns.map((col) => ({
           ...col,
+          width: parseInt(col.width),
           onCell: (record, index) => ({
             record,
             editable: true,
             isRequired: col.isRequired,
+            type: col.inputType,
             dataIndex: col.title.toLowerCase().replace(/\s/g, ""),
             index: index,
             title: col.title,
+            width: parseInt(col.width),
           }),
         }))
       );
@@ -77,13 +88,16 @@ const EditableTable = (props) => {
     if (value?.length && autoAddLastRow) {
       let lastRow = value[value.length - 1];
 
-      let lastRowHasEmptyValue = Object.values(lastRow).some((val) => val === null || val === "");
+      let isLastRowHasValues = Object.values(lastRow).every((val) => val === null || val === "");
 
-      if (!lastRowHasEmptyValue) {
+      if (!isLastRowHasValues) {
         let newArray = [
           ...value,
           ...Array(1).fill(columns.reduce((acc, cur) => ({ ...acc, [getDataIndex(cur)]: "" }), {})),
         ];
+        let newElement = { ...element, noOfRows: newArray.length };
+
+        onAnyChange?.(newElement);
         onChange(newArray);
         setDataSource(newArray);
       }
@@ -105,8 +119,10 @@ const EditableTable = (props) => {
             rowClassName={() => "editable-row"}
             bordered
             dataSource={dataSource}
+            rowKey={(record) => record.key}
             columns={columnsState}
             pagination={false}
+            scroll={{ x: 500 }}
           />
         );
       }}

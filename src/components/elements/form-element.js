@@ -18,7 +18,7 @@ import Upload from "./Upload";
 import EditableTable from "./EditableTable";
 import PhoneList from "./PhoneList";
 
-const FormElement = ({ element }) => {
+const FormElement = ({ element, onAnyChange }) => {
   const { dropEffect, type, id, label, field_name, rules, ...data } = element;
 
   const wrapFormItem = (children) => {
@@ -92,7 +92,9 @@ const FormElement = ({ element }) => {
         );
 
       case "Table":
-        return wrapFormItem(<EditableTable {...data} />);
+        return wrapFormItem(
+          <EditableTable {...data} element={element} onAnyChange={onAnyChange} />
+        );
       case "Phone":
         return wrapFormItem(<PhoneList {...data} />);
       default:

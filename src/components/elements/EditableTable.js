@@ -63,7 +63,6 @@ const EditableTable = (props) => {
   //to set columnsState when we have columns changes
   useEffect(() => {
     if (columns?.length) {
-      console.log("i am changing");
       setColumnsState(
         columns.map((col) => ({
           ...col,

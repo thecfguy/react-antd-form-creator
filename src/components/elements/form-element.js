@@ -41,7 +41,7 @@ const FormElement = ({ element, onAnyChange }) => {
                 if (data.src === "") data.src = "https://via.placeholder.com/728x90.png?text=Place+Your+Image+Here";
                 return (
                     <div style={{ textAlign: "center" }}>
-                        <img src={data.src} alt={data.alt} />
+                        <img style={{ maxWidth: "100%" }} src={data.src} alt={data.alt} />
                     </div>
                 );
             }
@@ -60,9 +60,9 @@ const FormElement = ({ element, onAnyChange }) => {
             case "TextArea":
                 return wrapFormItem(<Input.TextArea {...data} />);
             case "DatePicker":
-                return wrapFormItem(<DatePicker {...data} />);
+                return wrapFormItem(<DatePicker inputReadOnly {...data} />);
             case "TimePicker":
-                return wrapFormItem(<TimePicker {...data} />);
+                return wrapFormItem(<TimePicker inputReadOnly {...data} />);
             case "Range":
                 const marks = { [data.min]: data.minLabel, [data.max]: data.maxLabel };
                 return wrapFormItem(<Slider {...data} marks={marks} />);

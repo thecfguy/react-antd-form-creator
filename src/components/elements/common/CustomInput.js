@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { dateFormats, InputTypes } from "../../appConstants";
 import { Input, InputNumber, Checkbox, DatePicker, TimePicker } from "antd";
+// import Picker from "./Picker";
 
+// console.log(Picker, "Picker");
 const { TextArea } = Input;
 
 const CustomInput = (props) => {
@@ -25,11 +27,11 @@ const CustomInput = (props) => {
                 />
             );
         case InputTypes.Date:
-            return <DatePicker format={dateFormats.date} {...props} />;
+            return <DatePicker inputReadOnly format={dateFormats.date} {...props} />;
         case InputTypes.Time:
-            return <TimePicker format={dateFormats.time} {...props} />;
+            return <TimePicker inputReadOnly format={dateFormats.time} {...props} />;
         case InputTypes.DateTime:
-            return <DatePicker showTime format={dateFormats.dateTime} {...props} />;
+            return <DatePicker inputReadOnly showTime format={dateFormats.dateTime} {...props} />;
 
         default:
             return <Input {...props} />;

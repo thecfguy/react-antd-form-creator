@@ -11,14 +11,14 @@ const ViewElement = ({ element, value, ...props }) => {
             case "Header":
                 return <h1>{data.content}</h1>;
             case "Paragraph":
-                return <p>{data.content}</p>;
+                return <p className="mt-2">{data.content}</p>;
             case "LineBreak": {
                 const { content, ...props } = data;
                 return <Divider {...props}>{content}</Divider>;
             }
             case "Image": {
                 if (data.src === "") data.src = "https://via.placeholder.com/728x90.png?text=Place+Your+Image+Here";
-                return <img src={data.src} alt={data.alt} />;
+                return <img style={{ maxWidth: "100%" }} src={data.src} alt={data.alt} />;
             }
             case "Text":
             case "TextInput":
@@ -43,10 +43,11 @@ const ViewElement = ({ element, value, ...props }) => {
                     <Image.PreviewGroup>
                         {value?.map((item, index) => (
                             <Image
-                                width={200}
+                                width={"100%"}
                                 src={item.url}
                                 key={index}
                                 style={{
+                                    maxWidth: "100%",
                                     padding: "5px",
                                     minHeight: "100px",
                                     border: "1px solid #ccc"
@@ -71,9 +72,10 @@ const ViewElement = ({ element, value, ...props }) => {
                 return <Rate disabled value={value}></Rate>;
             case "DatePicker":
             case "TimePicker":
-                console.log(value, data);
                 let format = type === "DatePicker" ? dateFormats.date : dateFormats.time;
                 return <div>{value ? moment(value).format(format) : null}</div>;
+            case "DateTimePicker":
+                return <div>{value ? moment(value).format(dateFormats.dateTime) : null}</div>;
             case "TextArea":
                 return <pre>{value}</pre>;
             case "Signature":

@@ -72,7 +72,7 @@ const ViewElement = ({ element, value, ...props }) => {
                 return <Rate disabled value={value}></Rate>;
             case "DatePicker":
             case "TimePicker":
-                let format = type === "DatePicker" ? dateFormats.date : dateFormats.time;
+                let format = data.format || (type === "DatePicker" ? dateFormats.date : dateFormats.time);
                 return <div>{value ? moment(value).format(format) : null}</div>;
             case "DateTimePicker":
                 return <div>{value ? moment(value).format(dateFormats.dateTime) : null}</div>;

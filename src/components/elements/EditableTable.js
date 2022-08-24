@@ -3,9 +3,9 @@ import { Button, Form, Input, Table } from "antd";
 import { InputTypes } from "../appConstants";
 import CustomInput from "./common/CustomInput";
 
-const EditableCell = ({ title, width = 50, type, dataIndex, index, isRequired = false, ...restProps }) => {
+const EditableCell = ({ title, width, type, dataIndex, index, isRequired = false, record, ...restProps }) => {
     return (
-        <td {...restProps} style={{ width: width }}>
+        <td {...restProps} style={width ? { width: width + "px" } : {}}>
             <Form.Item
                 name={[index, dataIndex]}
                 style={{ margin: 0 }}
@@ -67,7 +67,7 @@ const EditableTable = (props) => {
             setColumnsState(
                 columns.map((col) => ({
                     ...col,
-                    width: parseInt(col?.width) > 0 ? parseInt(col.width) : 50,
+                    width: parseInt(col?.width) > 0 ? parseInt(col.width) : null,
                     onCell: (record, index) => ({
                         record,
                         editable: true,
@@ -75,8 +75,7 @@ const EditableTable = (props) => {
                         type: col.inputType,
                         dataIndex: col.title.toLowerCase().replace(/\s/g, ""),
                         index: index,
-                        title: col.title,
-                        width: parseInt(col?.width) > 0 ? parseInt(col.width) : 50
+                        title: col.title
                     })
                 }))
             );
@@ -122,7 +121,6 @@ const EditableTable = (props) => {
                         rowKey={(record) => record.key}
                         columns={columnsState}
                         pagination={false}
-                        scroll={{ x: 500 }}
                     />
                 );
             }}

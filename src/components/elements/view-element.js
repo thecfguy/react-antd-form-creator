@@ -31,7 +31,14 @@ const ViewElement = ({ element, value, ...props }) => {
                     <>
                         {value?.map((item, index) => (
                             <div key={index}>
-                                <a href={item.url} target="_blank" rel="noreferrer">
+                                <a
+                                    href={`${item.url}?${Date.now()}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                >
                                     {item.name}
                                 </a>
                             </div>

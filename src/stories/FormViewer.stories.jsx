@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Button, Row, Col } from "antd";
 import "@fortawesome/fontawesome-free/css/all.css";
-import "antd/dist/antd.css";
 import { FormViewer } from "../components";
 
 export default {

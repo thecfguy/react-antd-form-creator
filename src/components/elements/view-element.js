@@ -1,6 +1,6 @@
 import React from "react";
 import { Divider, Rate, Tag, Slider, Image, Table } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 import { dateFormats } from "../appConstants";
 
 const ViewElement = ({ element, value, ...props }) => {
@@ -80,9 +80,9 @@ const ViewElement = ({ element, value, ...props }) => {
             case "DatePicker":
             case "TimePicker":
                 let format = data.format || (type === "DatePicker" ? dateFormats.date : dateFormats.time);
-                return <div>{value ? moment(value).format(format) : null}</div>;
+                return <div>{value ? dayjs(value).format(format) : null}</div>;
             case "DateTimePicker":
-                return <div>{value ? moment(value).format(dateFormats.dateTime) : null}</div>;
+                return <div>{value ? dayjs(value).format(dateFormats.dateTime) : null}</div>;
             case "TextArea":
                 return <pre>{value}</pre>;
             case "Signature":
@@ -90,7 +90,7 @@ const ViewElement = ({ element, value, ...props }) => {
             case "Range":
                 const marks = { [data.min]: data.minLabel, [data.max]: data.maxLabel };
                 const { minLabel, maxLabel, ...rangeProps } = data;
-                return <Slider value={value} marks={marks} onChange={(e) => {}} {...rangeProps}></Slider>;
+                return <Slider value={value} marks={marks} onChange={(e) => { }} {...rangeProps}></Slider>;
             case "Table":
                 return (
                     <Table

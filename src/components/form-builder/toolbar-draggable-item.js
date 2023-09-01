@@ -2,33 +2,42 @@
  * <ToolbarItem />
  */
 
-import React from 'react';
-import { DragSource } from 'react-dnd';
+import React, { useContext } from 'react';
+import { useDrag } from 'react-dnd';
 import ItemTypes from '../ItemTypes';
 import ID from '../UUID';
 import classes from '../css/toolbar-draggable-item.module.css';
+import FormBuilderContext from '../form-builder-context';
 
-const cardSource = {
-	beginDrag(props) {
-		return {
-			...props.data.fieldProps,
+const ToolbarItem = (props) => {
+	const { data } = props;
+	const { elements, updateFormElement } = useContext(FormBuilderContext);
+	const [{ isDragging }, drag] = useDrag({
+		type: ItemTypes.CARD,
+		item: {
+			...data.fieldProps,
 			id: ID.uuid().toLowerCase(),
 			type: props.data.key,
 			field_name: "field_" + ID.uuid().toLowerCase()
-		};
-	},
-};
+		},
+		collect: (monitor) => ({
+			isDragging: monitor.isDragging(),
+		}),
+		end: (item, monitor) => {
+			const dropResult = monitor.getDropResult();
 
-const ToolbarItem = (props) => {
-	const { connectDragSource, data, onClick } = props;
-	if (!connectDragSource) return null;
+			if (item && dropResult) {
+				updateFormElement([...elements, item])
+			}
+		},
+	});
+
 	return (
-		<div ref={connectDragSource} className={classes.item} onClick={onClick}>
+		<div ref={drag} className={classes.item}>
 			<i className={data.icon}></i> <div>{data.name}</div>
 		</div>
 	);
 };
 
-export default DragSource(ItemTypes.CARD, cardSource, (connect) => ({
-	connectDragSource: connect.dragSource(),
-}))(ToolbarItem);
+export default ToolbarItem;
+

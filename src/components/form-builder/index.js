@@ -30,7 +30,7 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
   };
   return (
     <DndProvider backend={HTML5Backend}>
-      <FormBuilderContext.Provider value={{ elements, setElements }}>
+      <FormBuilderContext.Provider value={{ elements, setElements, updateFormElement }}>
         {showPreviewTab ? (
           <>
             <Tabs defaultActiveKey="1" centered>
@@ -78,7 +78,7 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
               title="View"
               footer={null}
               width={"90%"}
-              visible={showPreview}
+              open={showPreview}
               onCancel={(e) => setShowPreview(false)}
               style={{ width: "100%", resize: "auto" }}
             >

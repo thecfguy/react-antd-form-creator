@@ -1,6 +1,7 @@
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { FormBuilder } from "../components";
+import { Form } from "antd";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -314,3 +315,19 @@ NoPreview.args = {
     },
     showPreviewTab: false
 };
+
+const DnDFormInput = ({ fieldProps = [], value = [], onChange = null, ...props }) => {
+    return <FormBuilder fieldProps={fieldProps} fields={value} onUpdate={onChange} {...props} />;
+};
+
+const FormTemplate = (args) => {
+    return (
+        <Form>
+            <Form.Item name="customForm">
+                <DnDFormInput showPreviewTab={false} />
+            </Form.Item>
+        </Form>
+    );
+};
+
+export const AsAFormInput = FormTemplate.bind({});

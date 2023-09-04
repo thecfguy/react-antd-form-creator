@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Upload } from "antd";
 
 function getBase64(file) {
@@ -11,9 +11,9 @@ function getBase64(file) {
 }
 
 const UploadS3 = ({ action, value, onChange, children, listType, onPreview, multiple = true, ...props }) => {
-    const [previewVisible, setPreviewVisible] = React.useState(false);
-    const [previewImage, setPreviewImage] = React.useState("");
-    const [previewTitle, setPreviewTitle] = React.useState("");
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState("");
+    const [previewTitle, setPreviewTitle] = useState("");
 
     const changeHandler = async ({ fileList }) => {
         let res = fileList.map((file) => ({

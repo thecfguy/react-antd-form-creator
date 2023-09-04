@@ -17,8 +17,8 @@
     "peerDependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
         "antd": "^5.8.5",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     },
     "scripts": {
         "build-lib": "rollup -c",
@@ -46,8 +46,8 @@
         "chromatic": "^6.24.1",
         "postcss": "^8.4.29",
         "prop-types": "15.8.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
         "react-signature-canvas": "^1.0.6",
         "rollup": "^3.28.1",
         "rollup-plugin-babel": "^4.4.0",

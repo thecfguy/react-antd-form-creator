@@ -90,7 +90,7 @@ const ViewElement = ({ element, value, ...props }) => {
             case "Range":
                 const marks = { [data.min]: data.minLabel, [data.max]: data.maxLabel };
                 const { minLabel, maxLabel, ...rangeProps } = data;
-                return <Slider value={value} marks={marks} onChange={(e) => { }} {...rangeProps}></Slider>;
+                return <Slider value={value} marks={marks} onChange={(e) => {}} {...rangeProps}></Slider>;
             case "Table":
                 return (
                     <Table

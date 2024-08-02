@@ -25,4 +25,4 @@ export const dateFormats = {
 export const themeTypes = {
     light: "light",
     dark: "dark"
-}
+};

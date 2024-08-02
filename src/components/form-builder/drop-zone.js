@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback,  } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import ItemTypes from "../ItemTypes";
 import classes from "../css/drop-zone.module.css";
@@ -12,16 +12,15 @@ const dropZoneLabel = {
     margin: "10px",
     textAlign: "center",
     fontSize: "1.5em",
-    fontWeight: "bold",
+    fontWeight: "bold"
 };
 
 export const DropZone = ({ elements, onUpdate, formProps }) => {
-    const {token} = theme.useToken()
-    const bgColor = token.colorBgContainer
+    const { token } = theme.useToken();
+    const bgColor = token.colorBgContainer;
     const [visible, setVisible] = useState(false);
     const [currentElement, setCurrentElement] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(null);
-   
 
     const [{ canDrop, isOver, draggedItem }, drop] = useDrop(() => ({
         accept: ItemTypes.CARD,
@@ -33,27 +32,28 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
         })
     }));
     // console.log(elements,"<<<<elements")
-    
+
     // const idCount = elements.reduce((acc, obj) => {
     //     acc[obj.id] = (acc[obj.id] || 0) + 1;
     //     return acc;
     //   }, {});
     useEffect(() => {
-        console.log(draggedItem,"draggedItem")
-        if (draggedItem && elements && onUpdate) if (draggedItem.id) {
-          // filter out the  unique id of the dragged item
-        //   const filteredData = elements.filter(obj => idCount[obj.id] === 1);
-        //     onUpdate(filteredData)
-        onUpdate([...elements, draggedItem])
-        };
+        console.log(draggedItem, "draggedItem");
+        if (draggedItem && elements && onUpdate)
+            if (draggedItem.id) {
+                // filter out the  unique id of the dragged item
+                //   const filteredData = elements.filter(obj => idCount[obj.id] === 1);
+                //     onUpdate(filteredData)
+                onUpdate([...elements, draggedItem]);
+            }
     }, [draggedItem, elements, onUpdate]);
 
     const moveCard = useCallback(
         (dragIndex, hoverIndex) => {
-            console.log(elems,"elems")
+            console.log(elems, "elems");
             let elems = [...elements];
             [elems[dragIndex], elems[hoverIndex]] = [elems[hoverIndex], elems[dragIndex]];
-           console.log(elems,"elems")
+            console.log(elems, "elems");
             onUpdate(elems);
         },
         [elements, onUpdate]
@@ -79,11 +79,11 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
     };
 
     const isActive = canDrop && isOver;
-    let backgroundColor =  bgColor
+    let backgroundColor = bgColor;
     if (isActive) {
-        backgroundColor = token.colorBgElevated
+        backgroundColor = token.colorBgElevated;
     } else if (canDrop) {
-        backgroundColor =  token.colorBgLayout
+        backgroundColor = token.colorBgLayout;
     }
 
     return (
@@ -92,7 +92,6 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
                 {elements.map((element, index) => {
                     return (
                         <SortableElement
-                        
                             key={element.id}
                             index={index}
                             element={element}

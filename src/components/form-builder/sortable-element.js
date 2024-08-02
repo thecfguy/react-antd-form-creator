@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "../css/sortable-elements.module.css";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import ItemTypes from "../ItemTypes";
 import { FormElement } from "../elements";
-import { Button } from "antd";
+import { Button, theme } from "antd";
+import FormBuilderContext from "../form-builder-context";
 
 const SortableElement = ({ element, index, onMove, onEdit, onDelete, onEditProperties }) => {
     const ref = useRef(null);
+    const {token} = theme.useToken()
+    const bgColor = token.colorBgContainer
+    const { isDarkTheme  } = useContext(FormBuilderContext);
+  
     const [showAction, setShowAction] = useState(false);
     const [{ handlerId }, drop] = useDrop({
         accept: ItemTypes.BOX,
@@ -79,13 +84,18 @@ const SortableElement = ({ element, index, onMove, onEdit, onDelete, onEditPrope
     return (
         <div
             ref={preview}
-            className={classes.element}
+            className={
+                isDarkTheme ? classes.elementDark :
+                classes.element}
             style={{ opacity: opacity }}
+          
             data-handler-id={handlerId}
             onMouseOver={(e) => setShowAction(true)}
             onMouseOut={(e) => setShowAction(false)}
         >
-            <div className={classes.sorter} ref={ref}>
+            <div
+            
+             className={classes.sorter} ref={ref}>
                 <i className="fas fa-grip-vertical" style={{ margin: "10px", color: "#ccc" }}></i>
             </div>
             <div className={classes.formitem}>

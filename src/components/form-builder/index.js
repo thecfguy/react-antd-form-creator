@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Row, Col, Tabs, Button, Form, Modal, Layout } from "antd";
+import {theme as ANTDTheme, Row, Col, Tabs, Button, Form, Modal, Layout, ConfigProvider } from "antd";
 import Toolbar from "./toolbar";
 import FormBuilderContext from "../form-builder-context";
 import FormRenderer from "../form-renderer";
 import FormViewer from "../form-viewer";
 import DropZone from "./drop-zone";
 import PropTypes from "prop-types";
+import { themeTypes } from "../appConstants";
 
 const { Sider, Content } = Layout;
 const { TabPane } = Tabs;
-const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, ...props }) => {
+const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, theme = themeTypes.dark, ...props }) => {
+    const isDarkTheme  = theme === "dark";
     const [elements, setElements] = useState([]);
     const [showPreview, setShowPreview] = useState(false);
     const [formValue, setFormValue] = useState({});
@@ -32,13 +34,20 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
     }, []);
     return (
         <DndProvider backend={HTML5Backend}>
-            <FormBuilderContext.Provider value={{ elements, setElements, updateFormElement }}>
+            <ConfigProvider 
+            theme={{
+                algorithm : isDarkTheme ? ANTDTheme.darkAlgorithm : ANTDTheme.defaultAlgorithm,
+            }}
+            >
+            <FormBuilderContext.Provider value={{ elements, setElements, updateFormElement,
+                isDarkTheme
+             }}>
                 {showPreviewTab ? (
                     <>
                         <Tabs defaultActiveKey="1" centered>
                             <TabPane tab="Editor" key="1">
                                 <Layout style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}>
-                                    <Sider theme="light" width={250} breakpoint="md" collapsedWidth={0}>
+                                    <Sider theme={theme} width={250} breakpoint="md" collapsedWidth={0}>
                                         <Toolbar fieldProps={fieldProps} />
                                     </Sider>
                                     <Content
@@ -46,8 +55,8 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
                                             padding: 24,
                                             margin: 0,
                                             minHeight: 280,
-                                            backgroundColor: "#fff"
-                                        }}
+                                            
+                                        }}  
                                     >
                                         <DropZone
                                             elements={elements}
@@ -87,7 +96,9 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
                     </>
                 ) : (
                     <Layout style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}>
-                        <Sider theme="light" width={250} breakpoint="md" collapsedWidth={0}>
+                        <Sider theme={
+                            isDarkTheme ? "dark" : "light"
+                        } width={250} breakpoint="md" collapsedWidth={0}>
                             <Toolbar fieldProps={fieldProps} />
                         </Sider>
                         <Content
@@ -95,7 +106,7 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
                                 padding: 24,
                                 margin: 0,
                                 minHeight: 280,
-                                backgroundColor: "#fff"
+                               
                             }}
                         >
                             <DropZone elements={elements} onUpdate={updateFormElement} formProps={formProps} />
@@ -103,6 +114,7 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
                     </Layout>
                 )}
             </FormBuilderContext.Provider>
+            </ConfigProvider>
         </DndProvider>
     );
 };

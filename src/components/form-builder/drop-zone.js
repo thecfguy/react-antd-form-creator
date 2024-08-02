@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback,  } from "react";
 import { useDrop } from "react-dnd";
 import ItemTypes from "../ItemTypes";
 import classes from "../css/drop-zone.module.css";
 import SortableElement from "../form-builder/sortable-element";
-import { Form } from "antd";
+import { Form, theme } from "antd";
 import PropertyEditor from "../form-builder/property-editor";
 
 const dropZoneLabel = {
@@ -13,13 +13,16 @@ const dropZoneLabel = {
     textAlign: "center",
     fontSize: "1.5em",
     fontWeight: "bold",
-    backgroundColor: "#fafafa"
 };
 
 export const DropZone = ({ elements, onUpdate, formProps }) => {
+    const {token} = theme.useToken()
+    const bgColor = token.colorBgContainer
     const [visible, setVisible] = useState(false);
     const [currentElement, setCurrentElement] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(null);
+   
+
     const [{ canDrop, isOver, draggedItem }, drop] = useDrop(() => ({
         accept: ItemTypes.CARD,
         drop: (item, monitor) => item,
@@ -29,15 +32,28 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
             draggedItem: monitor.getDropResult()
         })
     }));
-
+    // console.log(elements,"<<<<elements")
+    
+    // const idCount = elements.reduce((acc, obj) => {
+    //     acc[obj.id] = (acc[obj.id] || 0) + 1;
+    //     return acc;
+    //   }, {});
     useEffect(() => {
-        if (draggedItem && elements && onUpdate) if (draggedItem.id) onUpdate([...elements, draggedItem]);
+        console.log(draggedItem,"draggedItem")
+        if (draggedItem && elements && onUpdate) if (draggedItem.id) {
+          // filter out the  unique id of the dragged item
+        //   const filteredData = elements.filter(obj => idCount[obj.id] === 1);
+        //     onUpdate(filteredData)
+        onUpdate([...elements, draggedItem])
+        };
     }, [draggedItem, elements, onUpdate]);
 
     const moveCard = useCallback(
         (dragIndex, hoverIndex) => {
+            console.log(elems,"elems")
             let elems = [...elements];
             [elems[dragIndex], elems[hoverIndex]] = [elems[hoverIndex], elems[dragIndex]];
+           console.log(elems,"elems")
             onUpdate(elems);
         },
         [elements, onUpdate]
@@ -63,11 +79,11 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
     };
 
     const isActive = canDrop && isOver;
-    let backgroundColor = "#fff";
+    let backgroundColor =  bgColor
     if (isActive) {
-        backgroundColor = "#fafafa";
+        backgroundColor = token.colorBgElevated
     } else if (canDrop) {
-        backgroundColor = "#fafafa";
+        backgroundColor =  token.colorBgLayout
     }
 
     return (
@@ -76,6 +92,7 @@ export const DropZone = ({ elements, onUpdate, formProps }) => {
                 {elements.map((element, index) => {
                     return (
                         <SortableElement
+                        
                             key={element.id}
                             index={index}
                             element={element}

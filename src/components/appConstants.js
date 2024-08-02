@@ -22,3 +22,7 @@ export const dateFormats = {
     time: "HH:mm",
     dateTime: "YYYY-MM-DD HH:mm"
 };
+export const themeTypes = {
+    light: "light",
+    dark: "dark"
+}

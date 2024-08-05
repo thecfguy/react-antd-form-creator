@@ -1,17 +1,27 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Row, Col, Tabs, Button, Form, Modal, Layout } from "antd";
+import { theme as ANTDTheme, Row, Col, Tabs, Button, Form, Modal, Layout, ConfigProvider } from "antd";
 import Toolbar from "./toolbar";
 import FormBuilderContext from "../form-builder-context";
 import FormRenderer from "../form-renderer";
 import FormViewer from "../form-viewer";
 import DropZone from "./drop-zone";
 import PropTypes from "prop-types";
+import { themeTypes } from "../appConstants";
 
 const { Sider, Content } = Layout;
 const { TabPane } = Tabs;
-const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, ...props }) => {
+const FormBuilder = ({
+    fields,
+    onUpdate,
+    fieldProps,
+    formProps,
+    showPreviewTab,
+    theme = themeTypes.dark,
+    ...props
+}) => {
+    const isDarkTheme = theme === "dark";
     const [elements, setElements] = useState([]);
     const [showPreview, setShowPreview] = useState(false);
     const [formValue, setFormValue] = useState({});
@@ -32,77 +42,88 @@ const FormBuilder = ({ fields, onUpdate, fieldProps, formProps, showPreviewTab, 
     }, []);
     return (
         <DndProvider backend={HTML5Backend}>
-            <FormBuilderContext.Provider value={{ elements, setElements, updateFormElement }}>
-                {showPreviewTab ? (
-                    <>
-                        <Tabs defaultActiveKey="1" centered>
-                            <TabPane tab="Editor" key="1">
-                                <Layout style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}>
-                                    <Sider theme="light" width={250} breakpoint="md" collapsedWidth={0}>
-                                        <Toolbar fieldProps={fieldProps} />
-                                    </Sider>
-                                    <Content
-                                        style={{
-                                            padding: 24,
-                                            margin: 0,
-                                            minHeight: 280,
-                                            backgroundColor: "#fff"
-                                        }}
+            <ConfigProvider
+                theme={{
+                    algorithm: isDarkTheme ? ANTDTheme.darkAlgorithm : ANTDTheme.defaultAlgorithm
+                }}
+            >
+                <FormBuilderContext.Provider value={{ elements, setElements, updateFormElement, isDarkTheme }}>
+                    {showPreviewTab ? (
+                        <>
+                            <Tabs defaultActiveKey="1" centered>
+                                <TabPane tab="Editor" key="1">
+                                    <Layout
+                                        style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}
                                     >
-                                        <DropZone
-                                            elements={elements}
-                                            onUpdate={updateFormElement}
-                                            formProps={formProps}
-                                        />
-                                    </Content>
-                                </Layout>
-                            </TabPane>
-                            <TabPane tab="Preview" key="2">
-                                <Row>
-                                    <Col span={2}></Col>
-                                    <Col span={20}>
-                                        <Form {...formProps} onFinish={onFormSubmit} onSubmit>
-                                            <FormRenderer elements={elements}></FormRenderer>
-                                            <Form.Item>
-                                                <Button type="primary" htmlType="submit">
-                                                    Submit
-                                                </Button>
-                                            </Form.Item>
-                                        </Form>
-                                    </Col>
-                                    <Col span={2}></Col>
-                                </Row>
-                            </TabPane>
-                        </Tabs>
-                        <Modal
-                            title="View"
-                            footer={null}
-                            width={"90%"}
-                            open={showPreview}
-                            onCancel={(e) => setShowPreview(false)}
-                            style={{ width: "100%", resize: "auto" }}
-                        >
-                            <FormViewer elements={elements} values={formValue}></FormViewer>
-                        </Modal>
-                    </>
-                ) : (
-                    <Layout style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}>
-                        <Sider theme="light" width={250} breakpoint="md" collapsedWidth={0}>
-                            <Toolbar fieldProps={fieldProps} />
-                        </Sider>
-                        <Content
-                            style={{
-                                padding: 24,
-                                margin: 0,
-                                minHeight: 280,
-                                backgroundColor: "#fff"
-                            }}
-                        >
-                            <DropZone elements={elements} onUpdate={updateFormElement} formProps={formProps} />
-                        </Content>
-                    </Layout>
-                )}
-            </FormBuilderContext.Provider>
+                                        <Sider theme={theme} width={250} breakpoint="md" collapsedWidth={0}>
+                                            <Toolbar fieldProps={fieldProps} />
+                                        </Sider>
+                                        <Content
+                                            style={{
+                                                padding: 24,
+                                                margin: 0,
+                                                minHeight: 280
+                                            }}
+                                        >
+                                            <DropZone
+                                                elements={elements}
+                                                onUpdate={updateFormElement}
+                                                formProps={formProps}
+                                            />
+                                        </Content>
+                                    </Layout>
+                                </TabPane>
+                                <TabPane tab="Preview" key="2">
+                                    <Row>
+                                        <Col span={2}></Col>
+                                        <Col span={20}>
+                                            <Form {...formProps} onFinish={onFormSubmit} onSubmit>
+                                                <FormRenderer elements={elements}></FormRenderer>
+                                                <Form.Item>
+                                                    <Button type="primary" htmlType="submit">
+                                                        Submit
+                                                    </Button>
+                                                </Form.Item>
+                                            </Form>
+                                        </Col>
+                                        <Col span={2}></Col>
+                                    </Row>
+                                </TabPane>
+                            </Tabs>
+                            <Modal
+                                title="View"
+                                footer={null}
+                                width={"90%"}
+                                open={showPreview}
+                                onCancel={(e) => setShowPreview(false)}
+                                style={{ width: "100%", resize: "auto" }}
+                            >
+                                <FormViewer elements={elements} values={formValue}></FormViewer>
+                            </Modal>
+                        </>
+                    ) : (
+                        <Layout style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}>
+                            <Sider
+                                theme={isDarkTheme ? "dark" : "light"}
+                                width={250}
+                                breakpoint="md"
+                                collapsedWidth={0}
+                            >
+                                <Toolbar fieldProps={fieldProps} />
+                            </Sider>
+                            <Content
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280
+                                }}
+                            >
+                                <DropZone elements={elements} onUpdate={updateFormElement} formProps={formProps} />
+                            </Content>
+                        </Layout>
+                    )}
+                </FormBuilderContext.Provider>
+            </ConfigProvider>
         </DndProvider>
     );
 };

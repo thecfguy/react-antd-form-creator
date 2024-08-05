@@ -1,7 +1,4 @@
-import FormElement from './form-element';
-import ViewElement from './view-element';
+import FormElement from "./form-element";
+import ViewElement from "./view-element";
 
-export {
-    FormElement,
-    ViewElement
-}
+export { FormElement, ViewElement };

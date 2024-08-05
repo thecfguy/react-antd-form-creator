@@ -2,6 +2,7 @@ import React from "react";
 
 const FormBuilderContext = React.createContext({
     elements: [],
-    setElements: () => { }
+    setElements: () => {},
+    isDarkTheme: false
 });
 export default FormBuilderContext;

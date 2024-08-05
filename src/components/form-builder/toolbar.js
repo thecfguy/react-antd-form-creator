@@ -6,8 +6,8 @@ import ToolbarItem from "./toolbar-draggable-item";
 import FormItems from "./form-items";
 
 function buildItems(items, fieldProps = [], defaultItems) {
-    let resultItems = [];
-    if (!items) resultItems = defaultItems;
+    let resultItems = defaultItems
+    if (items) resultItems = items;
 
     resultItems = resultItems.map((field) => {
         let found = fieldProps.find((overrideField) => field.key === overrideField.key);
@@ -18,12 +18,12 @@ function buildItems(items, fieldProps = [], defaultItems) {
 }
 //TODO: Fields still need to implement
 
-const Toolbar = ({ fields, fieldProps, ...props }) => {
+const Toolbar = ({ toolbarItems, fieldProps, ...props }) => {
     const [items, setItems] = useState([]);
-
+console.log(toolbarItems,"toolbarItems")
     useEffect(() => {
-        setItems(buildItems(fields, fieldProps, FormItems));
-    }, [fields, fieldProps]);
+        setItems(buildItems(toolbarItems, fieldProps, FormItems));
+    }, [toolbarItems, fieldProps]);
 
     return (
         <div>

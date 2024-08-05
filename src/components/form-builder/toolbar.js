@@ -20,7 +20,7 @@ function buildItems(items, fieldProps = [], defaultItems) {
 
 const Toolbar = ({ toolbarItems, fieldProps, ...props }) => {
     const [items, setItems] = useState([]);
-console.log(toolbarItems,"toolbarItems")
+    
     useEffect(() => {
         setItems(buildItems(toolbarItems, fieldProps, FormItems));
     }, [toolbarItems, fieldProps]);

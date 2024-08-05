@@ -2,6 +2,7 @@ import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { FormBuilder } from "../components";
 import { Form } from "antd";
+import FormItems from "../components/form-builder/form-items";
 const argsTemp = {
     fieldProps: [
         {
@@ -274,7 +275,7 @@ const argsTempPreLoaded  = {
         colon: true,
         requiredMark: true,
         labelCol: { span: 5 }
-    }
+    },toolbarItems: FormItems.filter((item) => item.key === "Header" || item.key === "Paragraph")
 };
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

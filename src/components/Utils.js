@@ -1,5 +1,5 @@
 const isMobile = (breakPoints) => {
-    return (breakPoints.xs || (breakPoints.sm && !breakPoints.md))
-}
+    return breakPoints.xs || (breakPoints.sm && !breakPoints.md);
+};
 
 export { isMobile };

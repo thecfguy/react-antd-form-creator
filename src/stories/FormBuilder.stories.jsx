@@ -2,19 +2,7 @@ import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { FormBuilder } from "../components";
 import { Form } from "antd";
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
-    title: "FormBuilder",
-    component: FormBuilder
-};
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <FormBuilder {...args} />;
-
-export const FromScratch = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-FromScratch.args = {
+const argsTemp = {
     fieldProps: [
         {
             key: "File",
@@ -52,9 +40,7 @@ FromScratch.args = {
     }
 };
 
-export const PreLoaded = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-PreLoaded.args = {
+const argsTempPreLoaded = {
     fields: [
         {
             dropEffect: "move",
@@ -291,30 +277,89 @@ PreLoaded.args = {
     }
 };
 
-export const NoPreview = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-NoPreview.args = {
-    fields: [
-        {
-            dropEffect: "move",
-            content: "Header",
-            id: "b8d264c4-ea10-4dd0-990e-6ad4ca090c42",
-            type: "Header",
-            field_name: "field_de8ce171-8877-4f70-9173-57e6f2668a9d"
-        },
-        {
-            dropEffect: "move",
-            content: "Your text",
-            id: "b664c762-9673-4142-925f-e761fc3b9496",
-            type: "Paragraph",
-            field_name: "field_1e8fe106-5cb1-4a59-814b-c19e38732c68"
-        }
-    ],
-    onUpdate: function (fields) {
-        console.log(fields);
-    },
-    showPreviewTab: false
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+    title: "FormBuilder",
+    component: FormBuilder,
+    args: argsTemp,
+    decorators: [
+        (Story) => (
+            <div style={{ margin: "3em" }}>
+                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+                <Story />
+            </div>
+        )
+    ]
 };
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+
+// const FromScratch2 = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+
+export const FromScratch = {
+    component: FormBuilder,
+    args: argsTempPreLoaded,
+    decorators: [
+        (Story) => (
+            <div style={{ margin: "3em" }}>
+                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const PreLoaded = {
+    component: FormBuilder,
+    args: argsTempPreLoaded,
+    decorators: [
+        (Story) => (
+            <div style={{ margin: "3em" }}>
+                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const NoPreview = {
+    component: FormBuilder,
+    args: {
+        fields: [
+            {
+                dropEffect: "move",
+                content: "Header",
+                id: "b8d264c4-ea10-4dd0-990e-6ad4ca090c42",
+                type: "Header",
+                field_name: "field_de8ce171-8877-4f70-9173-57e6f2668a9d"
+            },
+            {
+                dropEffect: "move",
+                content: "Your text",
+                id: "b664c762-9673-4142-925f-e761fc3b9496",
+                type: "Paragraph",
+                field_name: "field_1e8fe106-5cb1-4a59-814b-c19e38732c68"
+            }
+        ],
+        onUpdate: function (fields) {
+            console.log(fields);
+        },
+        showPreviewTab: false
+    },
+    decorators: [
+        (Story) => (
+            <div style={{ margin: "3em" }}>
+                {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+                <Story />
+            </div>
+        )
+    ]
+};
+
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 const DnDFormInput = ({ fieldProps = [], value = [], onChange = null, ...props }) => {
     return <FormBuilder fieldProps={fieldProps} fields={value} onUpdate={onChange} {...props} />;

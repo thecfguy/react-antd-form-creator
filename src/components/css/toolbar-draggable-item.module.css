@@ -5,12 +5,12 @@
     padding: 10px;
     border: 1px dashed #ddd;
     display: flex;
-    justify-content: flex-start 
+    justify-content: flex-start;
 }
 .item > i {
     margin-right: 10px;
-    padding-top:5px;
+    padding-top: 5px;
 }
 .item > div {
-    margin-right: 10px
+    margin-right: 10px;
 }

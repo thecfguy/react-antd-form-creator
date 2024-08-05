@@ -8,6 +8,7 @@ import ItemTypes from "../ItemTypes";
 import ID from "../UUID";
 import classes from "../css/toolbar-draggable-item.module.css";
 import FormBuilderContext from "../form-builder-context";
+import { Space, Typography } from "antd";
 
 const ToolbarItem = (props) => {
     const { data } = props;
@@ -34,7 +35,11 @@ const ToolbarItem = (props) => {
 
     return (
         <div ref={drag} className={classes.item}>
-            <i className={data.icon}></i> <div>{data.name}</div>
+            <Typography.Text>
+                <Space>
+                    <i className={data.icon}></i> <span>{data.name}</span>
+                </Space>
+            </Typography.Text>
         </div>
     );
 };

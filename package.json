@@ -1,6 +1,6 @@
 {
     "name": "react-antd-form-creator",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Allow to build form using drag and drop component specifically build for antd",
     "author": "Pritesh Patel",
     "license": "MIT",
@@ -61,9 +61,8 @@
         "react-dnd": "^16.0.1",
         "react-dnd-html5-backend": "^16.0.1",
         "react-signature-canvas": "^1.0.6"
-    }
-    ,
+    },
     "overrides": {
-    "strip-ansi": "7.1.0"
-  }
+        "strip-ansi": "7.1.0"
+    }
 }

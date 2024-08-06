@@ -40,7 +40,7 @@ const argsTemp = {
     }
 };
 
-const argsTempPreLoaded  = {
+const argsTempPreLoaded = {
     fields: [
         {
             dropEffect: "move",
@@ -297,8 +297,6 @@ export default {
 // const FromScratch2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-
-
 export const FromScratch = {
     component: FormBuilder,
     args: argsTempPreLoaded,
@@ -312,10 +310,7 @@ export const FromScratch = {
     ]
 };
 
-
-
-
-export const PreLoaded ={
+export const PreLoaded = {
     component: FormBuilder,
     args: argsTempPreLoaded,
     decorators: [
@@ -328,10 +323,9 @@ export const PreLoaded ={
     ]
 };
 
-
 export const NoPreview = {
     component: FormBuilder,
-    args:  {
+    args: {
         fields: [
             {
                 dropEffect: "move",
@@ -363,12 +357,9 @@ export const NoPreview = {
     ]
 };
 
-
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-
 
 const DnDFormInput = ({ fieldProps = [], value = [], onChange = null, ...props }) => {
     return <FormBuilder fieldProps={fieldProps} fields={value} onUpdate={onChange} {...props} />;

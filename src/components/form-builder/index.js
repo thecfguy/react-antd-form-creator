@@ -9,11 +9,13 @@ import FormViewer from "../form-viewer";
 import DropZone from "./drop-zone";
 import PropTypes from "prop-types";
 import { themeTypes } from "../appConstants";
+import FormItems from "./form-items";
 
 const { Sider, Content } = Layout;
 const { TabPane } = Tabs;
 const FormBuilder = ({
     fields,
+    toolbarItems,
     onUpdate,
     fieldProps,
     formProps,
@@ -56,7 +58,7 @@ const FormBuilder = ({
                                         style={{ height: "100%", display: "flex", alignItems: "stretch", gap: "10px" }}
                                     >
                                         <Sider theme={theme} width={250} breakpoint="md" collapsedWidth={0}>
-                                            <Toolbar fieldProps={fieldProps} />
+                                            <Toolbar toolbarItems={toolbarItems} fieldProps={fieldProps} />
                                         </Sider>
                                         <Content
                                             style={{
@@ -109,7 +111,7 @@ const FormBuilder = ({
                                 breakpoint="md"
                                 collapsedWidth={0}
                             >
-                                <Toolbar fieldProps={fieldProps} />
+                                <Toolbar toolbarItems={toolbarItems} fieldProps={fieldProps} />
                             </Sider>
                             <Content
                                 style={{
